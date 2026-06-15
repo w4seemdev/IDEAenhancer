@@ -38,7 +38,7 @@ export function IdeaCardView({ card, loading, onEvolve }: IdeaCardViewProps) {
 
   return (
     <article
-      className={`flex flex-col rounded-xl border-l-2 ${accent.rule} bg-white/80 p-6 shadow-sm ring-1 ring-stone-100 transition hover:shadow-md sm:p-7`}
+      className={`flex flex-col rounded-xl border-l-2 ${accent.rule} bg-white/80 p-6 shadow-sm ring-1 ring-stone-100 transition hover:shadow-md motion-reduce:transition-none sm:p-7`}
     >
       <header className="flex items-center gap-2.5">
         <span
@@ -72,7 +72,8 @@ export function IdeaCardView({ card, loading, onEvolve }: IdeaCardViewProps) {
           type="button"
           onClick={() => onEvolve(card)}
           disabled={loading}
-          className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm text-stone-600 transition hover:bg-stone-100 hover:text-stone-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-stone-400/60 disabled:cursor-not-allowed disabled:opacity-40"
+          aria-label={`Evolve ${card.name} further`}
+          className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm text-stone-600 transition hover:bg-stone-100 hover:text-stone-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-stone-400/60 motion-reduce:transition-none disabled:cursor-not-allowed disabled:opacity-40"
         >
           <GitBranch size={15} aria-hidden />
           Evolve
@@ -80,7 +81,8 @@ export function IdeaCardView({ card, loading, onEvolve }: IdeaCardViewProps) {
         <button
           type="button"
           onClick={() => void share(card)}
-          className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm text-stone-600 transition hover:bg-stone-100 hover:text-stone-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-stone-400/60"
+          aria-label={`Share ${card.name}`}
+          className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm text-stone-600 transition hover:bg-stone-100 hover:text-stone-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-stone-400/60 motion-reduce:transition-none"
         >
           {status === 'idle' ? (
             <>

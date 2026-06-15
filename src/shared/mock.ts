@@ -85,5 +85,6 @@ export function mockEnhance(seed: string, lineage: string[] = []): EnhanceResult
     seed: trimmed,
     cards: build(trimmed),
     lineage: [...lineage, trimmed],
+    source: 'mock',
   };
 }

@@ -1,4 +1,4 @@
-import type { IdeaCard } from '../../shared/types';
+import type { EnhanceResult, IdeaCard } from '../../shared/types';
 import { DIRECTION_MAP } from '../../shared/directions';
 
 /** Format a single card into a tidy, shareable block of text. */
@@ -16,6 +16,27 @@ export function formatCard(card: IdeaCard): string {
     '',
     'Made with Idea Enhancer ✨',
   ].join('\n');
+}
+
+/** Format the whole set of four cards into one shareable digest. */
+export function formatSet(result: EnhanceResult): string {
+  const seed = result.lineage[result.lineage.length - 1] ?? result.seed;
+  const blocks = result.cards.map((card) => {
+    const dir = DIRECTION_MAP[card.direction];
+    return [
+      `${dir.emoji} ${dir.label}: ${card.name}`,
+      `“${card.tagline}”`,
+      `• Twist: ${card.twist}`,
+      `• Who it's for: ${card.audience}`,
+      `• How it makes money: ${card.businessModel}`,
+      `• Weekend MVP: ${card.weekendMvp}`,
+      `• Biggest risk: ${card.biggestRisk}`,
+    ].join('\n');
+  });
+
+  return [`💡 4 ways to build "${seed}"`, '', blocks.join('\n\n'), '', 'Made with Idea Enhancer ✨'].join(
+    '\n',
+  );
 }
 
 export type ShareOutcome = 'shared' | 'copied' | 'failed';

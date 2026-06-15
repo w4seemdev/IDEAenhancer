@@ -85,9 +85,10 @@ export default function IdeaCardView({ card, index, loading, onEvolve, onShare }
             type="button"
             onClick={() => onEvolve(card)}
             disabled={loading}
+            aria-label={`Evolve ${card.name} into four new ideas`}
             className={clsx(
-              'a-press inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl px-4 py-2.5',
-              'font-bold disabled:opacity-60',
+              'a-press a-focus inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl px-4 py-2.5',
+              'font-bold disabled:cursor-not-allowed disabled:opacity-60',
               theme.button,
             )}
           >
@@ -97,10 +98,11 @@ export default function IdeaCardView({ card, index, loading, onEvolve, onShare }
           <button
             type="button"
             onClick={() => onShare(card)}
+            disabled={loading}
             aria-label={`Share ${card.name}`}
             className={clsx(
-              'a-press inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5',
-              'font-semibold text-white ring-1 ring-white/15 hover:bg-white/10',
+              'a-press a-focus inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5',
+              'font-semibold text-white ring-1 ring-white/15 hover:bg-white/10 disabled:opacity-60',
             )}
           >
             <Share2 className="h-4 w-4" aria-hidden />

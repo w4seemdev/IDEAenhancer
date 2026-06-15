@@ -41,7 +41,7 @@ export async function enhanceIdea(seed: string, lineage: string[] = []): Promise
     if (!res.ok) throw new Error(`enhance failed: ${res.status}`);
     const data = (await res.json()) as { cards?: unknown };
     if (!looksValid(data.cards)) throw new Error('malformed response');
-    return { seed: trimmed, cards: data.cards, lineage: [...lineage, trimmed] };
+    return { seed: trimmed, cards: data.cards, lineage: [...lineage, trimmed], source: 'live' };
   } catch {
     // Graceful fallback so the experience never breaks for a demo.
     return mockEnhance(trimmed, lineage);

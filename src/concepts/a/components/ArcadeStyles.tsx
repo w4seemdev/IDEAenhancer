@@ -62,10 +62,17 @@ export default function ArcadeStyles() {
       .a-press:hover { transform: translateY(-2px); }
       .a-press:active { transform: translateY(1px) scale(0.98); }
 
+      /* Consistent, high-contrast focus ring for keyboard users on dark bg. */
+      .a-focus:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 2px #020617, 0 0 0 4px #ffffff;
+      }
+
       @media (prefers-reduced-motion: reduce) {
         .a-pop-in, .a-float, .a-toast-in, .a-gradient-text, .a-slot-strip {
           animation: none !important;
         }
+        .a-press { transition: none; }
         .a-press:hover, .a-press:active { transform: none; }
       }
     `}</style>

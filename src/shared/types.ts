@@ -30,6 +30,8 @@ export interface EnhanceResult {
   cards: IdeaCard[];
   /** Seeds in evolution order, oldest first, this seed last. */
   lineage: string[];
+  /** Where the cards came from: the live Claude API or the offline mock fallback. */
+  source: 'live' | 'mock';
 }
 
 /** Display metadata for each of the four directions. */

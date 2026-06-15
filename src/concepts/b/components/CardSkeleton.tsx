@@ -6,7 +6,7 @@ export function CardSkeleton() {
   return (
     <div
       aria-hidden
-      className="flex animate-pulse flex-col rounded-xl border-l-2 border-stone-200 bg-white/60 p-6 shadow-sm ring-1 ring-stone-100 sm:p-7"
+      className="flex flex-col rounded-xl border-l-2 border-stone-200 bg-white/60 p-6 shadow-sm ring-1 ring-stone-100 motion-safe:animate-pulse sm:p-7"
     >
       <div className="h-3 w-24 rounded bg-stone-200" />
       <div className="mt-4 h-6 w-3/4 rounded bg-stone-200" />

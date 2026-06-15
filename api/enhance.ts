@@ -10,6 +10,40 @@ import Anthropic from '@anthropic-ai/sdk';
 // (Idea cards are short, so output cost per call is modest.)
 const MODEL = process.env.ANTHROPIC_MODEL || 'claude-opus-4-8';
 
+// Hard caps. Seeds are one-liners; anything past this is abuse or a paste accident.
+const MAX_SEED_CHARS = 600;
+// Keep the evolution chain bounded so the prompt (and cost) can't grow unbounded.
+const MAX_LINEAGE = 8;
+// Four short cards via strict tool use fit comfortably here; bump only if cards grow.
+const MAX_TOKENS = 2048;
+
+// Simple in-memory per-IP rate limiter. Good enough for a single serverless
+// instance / demo; for real scale use a shared store (KV/Redis). State resets on
+// cold start, which is acceptable here.
+const RATE_LIMIT = 20; // requests
+const RATE_WINDOW_MS = 60_000; // per minute
+const hits = new Map<string, number[]>();
+
+/** Returns true if this IP is over the limit; records the hit otherwise. */
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (hits.get(ip) || []).filter((t) => now - t < RATE_WINDOW_MS);
+  if (recent.length >= RATE_LIMIT) {
+    hits.set(ip, recent); // keep the window pruned even when blocking
+    return true;
+  }
+  recent.push(now);
+  hits.set(ip, recent);
+  return false;
+}
+
+/** Best-effort client IP from the proxy header, falling back to the socket. */
+function clientIp(req: VercelRequest): string {
+  const fwd = req.headers['x-forwarded-for'];
+  const raw = Array.isArray(fwd) ? fwd[0] : fwd;
+  return (raw?.split(',')[0].trim() || req.socket?.remoteAddress || 'unknown');
+}
+
 const SYSTEM = `You are an idea-enhancement engine. Given a small seed idea, you expand it into exactly FOUR divergent, fully-developed product concepts — one per direction:
 
 - focused  (🎯 The Focused MVP): strip the idea to its core; the version you could ship this weekend.
@@ -65,6 +99,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
+  // Per-IP rate limit before doing any work (incl. the API key check).
+  if (isRateLimited(clientIp(req))) {
+    res.status(429).json({ error: 'rate_limited', detail: 'Too many requests — wait a minute and try again.' });
+    return;
+  }
+
   // No key configured -> 501 so the client falls back to the deterministic mock.
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
@@ -77,7 +117,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.status(400).json({ error: 'missing_seed' });
     return;
   }
-  const lineage: string[] = Array.isArray(req.body?.lineage) ? req.body.lineage : [];
+  // Hard input cap: reject overly long seeds rather than silently truncating.
+  if (seed.length > MAX_SEED_CHARS) {
+    res.status(400).json({ error: 'seed_too_long', detail: `Keep the idea under ${MAX_SEED_CHARS} characters.` });
+    return;
+  }
+
+  // Lineage cap: ignore anything beyond the most recent MAX_LINEAGE entries so the
+  // prompt can't grow without bound. Non-string entries are dropped defensively.
+  const lineage: string[] = (Array.isArray(req.body?.lineage) ? req.body.lineage : [])
+    .filter((s: unknown): s is string => typeof s === 'string')
+    .slice(-MAX_LINEAGE);
 
   const userText =
     lineage.length > 0
@@ -88,7 +138,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const client = new Anthropic({ apiKey });
     const message = await client.messages.create({
       model: MODEL,
-      max_tokens: 2048,
+      max_tokens: MAX_TOKENS,
       system: SYSTEM,
       tools: [TOOL],
       tool_choice: { type: 'tool', name: 'emit_ideas' },

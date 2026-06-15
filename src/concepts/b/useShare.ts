@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import type { IdeaCard } from '../../shared/types';
 import { DIRECTION_MAP } from '../../shared/directions';
 
-/** Format a card into clean, shareable plain text. */
+/** Format a single card into clean, shareable plain text. */
 function formatCard(card: IdeaCard): string {
   const meta = DIRECTION_MAP[card.direction];
   return [
@@ -18,12 +18,20 @@ function formatCard(card: IdeaCard): string {
   ].join('\n');
 }
 
+/** Format the whole set — the seed plus all four directions — for sharing. */
+function formatSet(seed: string, cards: IdeaCard[]): string {
+  const header = [`Idea: ${seed}`, `Four directions from Idea Enhancer:`, ``];
+  const body = cards.map((c) => formatCard(c)).join('\n\n———\n\n');
+  return [...header, body].join('\n');
+}
+
 type ShareStatus = 'idle' | 'copied' | 'shared';
 
 /**
- * Per-card share/copy. Prefers the native share sheet when present, otherwise
- * falls back to the clipboard with a brief "Copied" confirmation. Both paths
- * are guarded for environments that expose neither.
+ * Share/copy helper. Prefers the native share sheet when present, otherwise
+ * falls back to the clipboard with a brief confirmation. Both paths are guarded
+ * for environments that expose neither. `share` handles one card; `shareSet`
+ * handles the whole result set with the identical guarded pattern.
  */
 export function useShare() {
   const [status, setStatus] = useState<ShareStatus>('idle');
@@ -35,11 +43,9 @@ export function useShare() {
     timer.current = setTimeout(() => setStatus('idle'), 1800);
   }, []);
 
-  const share = useCallback(
-    async (card: IdeaCard) => {
-      const text = formatCard(card);
-      const title = card.name;
-
+  /** Core guarded share: try native share, then clipboard, then give up. */
+  const shareText = useCallback(
+    async (title: string, text: string) => {
       const nav = typeof navigator !== 'undefined' ? navigator : undefined;
 
       if (nav?.share) {
@@ -65,5 +71,16 @@ export function useShare() {
     [flash],
   );
 
-  return { status, share };
+  const share = useCallback(
+    (card: IdeaCard) => shareText(card.name, formatCard(card)),
+    [shareText],
+  );
+
+  const shareSet = useCallback(
+    (seed: string, cards: IdeaCard[]) =>
+      shareText(`Idea Enhancer — ${seed}`, formatSet(seed, cards)),
+    [shareText],
+  );
+
+  return { status, share, shareSet };
 }
