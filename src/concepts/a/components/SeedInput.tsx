@@ -44,7 +44,7 @@ export default function SeedInput({
   return (
     <form onSubmit={submit} className="w-full">
       <label htmlFor={fieldId} className="mb-2 block text-sm font-semibold text-white/80">
-        Drop a tiny idea — we'll spin up four wild versions
+        Drop a tiny idea, we'll spin up four wild versions
       </label>
 
       <div

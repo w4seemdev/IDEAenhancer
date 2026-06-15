@@ -33,8 +33,8 @@ export default function ConceptB() {
             Turn a sentence into four serious directions.
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-stone-600">
-            Type a small idea. We&rsquo;ll develop it four ways — focused,
-            tenfold, contrarian, and commercial — then let you evolve any one of
+            Type a small idea. We&rsquo;ll develop it four ways: focused,
+            tenfold, contrarian, and commercial, then let you evolve any one of
             them further.
           </p>
         </header>

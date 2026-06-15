@@ -6,7 +6,7 @@ export const DIRECTIONS: DirectionMeta[] = [
     key: 'focused',
     label: 'Focused MVP',
     emoji: '🎯',
-    blurb: 'Stripped to the core — ship it this weekend.',
+    blurb: 'Stripped to the core. Ship it this weekend.',
     accent: 'emerald',
   },
   {
@@ -20,12 +20,12 @@ export const DIRECTIONS: DirectionMeta[] = [
     key: 'contrarian',
     label: 'The Contrarian',
     emoji: '🤿',
-    blurb: 'The weird, against-the-grain version.',
+    blurb: 'The weird, against the grain version.',
     accent: 'amber',
   },
   {
     key: 'moneymaker',
-    label: 'The Money-Maker',
+    label: 'The Money Maker',
     emoji: '💰',
     blurb: 'The version with an obvious business model.',
     accent: 'rose',

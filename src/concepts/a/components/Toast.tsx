@@ -16,7 +16,7 @@ interface ToastProps {
 const COPY: Record<ShareOutcome, { icon: typeof Check; text: string; tone: string }> = {
   shared: { icon: Share2, text: 'Shared! 🎉', tone: 'from-emerald-500 to-teal-500' },
   copied: { icon: Copy, text: 'Copied to clipboard! 📋', tone: 'from-violet-500 to-fuchsia-500' },
-  failed: { icon: X, text: "Couldn't share — copy it manually.", tone: 'from-rose-600 to-rose-500' },
+  failed: { icon: X, text: "Couldn't share. Copy it manually.", tone: 'from-rose-600 to-rose-500' },
 };
 
 export default function Toast({ toast, onDismiss }: ToastProps) {

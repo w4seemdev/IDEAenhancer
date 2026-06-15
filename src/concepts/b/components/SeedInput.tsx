@@ -63,7 +63,7 @@ export function SeedInput({ loading, error, onEnhance }: SeedInputProps) {
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={handleKeyDown}
         rows={3}
-        placeholder="A few words is enough — e.g. “a calendar that protects deep work”"
+        placeholder="A few words is enough, e.g. “a calendar that protects deep work”"
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? errorId : hintId}
         className="w-full resize-none rounded-lg border border-stone-300 bg-white/70 px-4 py-3 text-lg leading-relaxed text-stone-800 placeholder:text-stone-400 shadow-sm outline-none transition focus:border-stone-500 focus:ring-2 focus:ring-stone-400/40"

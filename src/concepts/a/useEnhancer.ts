@@ -92,7 +92,7 @@ export function useEnhancer() {
 
   const evolve = useCallback(
     (card: IdeaCard) => {
-      void run(`${card.name} — ${card.tagline}`, lineageRef.current);
+      void run(`${card.name}: ${card.tagline}`, lineageRef.current);
     },
     [run],
   );

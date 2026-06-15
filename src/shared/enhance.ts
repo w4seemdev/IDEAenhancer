@@ -30,7 +30,7 @@ function looksValid(cards: unknown): cards is IdeaCard[] {
  */
 export async function enhanceIdea(seed: string, lineage: string[] = []): Promise<EnhanceResult> {
   const trimmed = seed.trim();
-  if (!trimmed) throw new Error('Type an idea first — even a few words works.');
+  if (!trimmed) throw new Error('Type an idea first, even a few words works.');
 
   try {
     const res = await fetch('/api/enhance', {

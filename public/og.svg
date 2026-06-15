@@ -33,7 +33,7 @@
   <text x="80" y="392" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="76" font-weight="800" fill="#a78bfa">Get four bigger, better ones.</text>
 
   <!-- Subhead -->
-  <text x="80" y="452" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="30" font-weight="400" fill="#a3a3a3">Focused · 10x · Contrarian · Money-Maker — one line in, four concepts out.</text>
+  <text x="80" y="452" font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="30" font-weight="400" fill="#a3a3a3">Focused · 10x · Contrarian · Money Maker · one line in, four concepts out.</text>
 
   <!-- Direction chips -->
   <g font-family="'Segoe UI', system-ui, -apple-system, sans-serif" font-size="30">
@@ -51,7 +51,7 @@
     </g>
     <g transform="translate(658, 510)">
       <rect width="230" height="64" rx="32" fill="#f43f5e22" stroke="#f43f5e55"/>
-      <text x="30" y="42" fill="#e5e5e5">💰 Money-Maker</text>
+      <text x="30" y="42" fill="#e5e5e5">💰 Money Maker</text>
     </g>
   </g>
 </svg>

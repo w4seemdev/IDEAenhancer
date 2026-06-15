@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { Sparkles, ArrowRight, Code } from 'lucide-react';
-import { DIRECTIONS } from './shared/directions';
 
 // The real product landing page. Sells the value prop, explains the four
 // directions, and routes visitors into the recommended concept (/b) with a
@@ -8,8 +7,8 @@ import { DIRECTIONS } from './shared/directions';
 // accessible (landmarks, real heading order, visible focus states).
 
 const HOW = [
-  { step: '1', title: 'Type a seed', body: 'A half-formed thought, a shower idea, one scrappy line. That is enough.' },
-  { step: '2', title: 'Get four angles', body: 'We expand it into four distinct directions — not four reworded clones.' },
+  { step: '1', title: 'Type a seed', body: 'A half formed thought, a shower idea, one scrappy line. That is enough.' },
+  { step: '2', title: 'Get four angles', body: 'We expand it into four distinct directions, not four reworded clones.' },
   { step: '3', title: 'Evolve the best', body: 'Pick the one with a spark and push it further. The lineage is tracked.' },
 ];
 
@@ -59,8 +58,8 @@ export default function Home() {
               </span>
             </h1>
             <p className="mt-6 max-w-xl text-pretty text-lg text-neutral-400">
-              Idea Enhancer takes one scrappy line and expands it into four fully-developed
-              product concepts — focused, ambitious, contrarian, and built to make money.
+              Idea Enhancer takes one scrappy line and expands it into four fully developed
+              product concepts: focused, ambitious, contrarian, and built to make money.
             </p>
 
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
@@ -78,28 +77,7 @@ export default function Home() {
                 See the playful version
               </Link>
             </div>
-            <p className="mt-4 text-sm text-neutral-500">Free to try. No sign-up. Works offline.</p>
-          </section>
-
-          {/* The four directions */}
-          <section aria-labelledby="directions-heading" className="py-12">
-            <h2 id="directions-heading" className="text-center text-sm font-semibold uppercase tracking-widest text-neutral-500">
-              Every idea, four ways
-            </h2>
-            <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {DIRECTIONS.map((d) => (
-                <li
-                  key={d.key}
-                  className="rounded-2xl border border-neutral-800 bg-neutral-900/60 p-5 transition-colors hover:border-neutral-700"
-                >
-                  <div className="text-3xl" aria-hidden="true">
-                    {d.emoji}
-                  </div>
-                  <h3 className="mt-3 font-semibold text-neutral-100">{d.label}</h3>
-                  <p className="mt-1 text-sm text-neutral-400">{d.blurb}</p>
-                </li>
-              ))}
-            </ul>
+            <p className="mt-4 text-sm text-neutral-500">Free to try. No signup. Works offline.</p>
           </section>
 
           {/* How it works */}
@@ -125,7 +103,7 @@ export default function Home() {
 
           {/* Closing CTA */}
           <section className="my-12 rounded-3xl border border-violet-500/20 bg-linear-to-b from-violet-500/10 to-transparent px-6 py-14 text-center">
-            <h2 className="text-2xl font-bold sm:text-3xl">Got a half-formed idea?</h2>
+            <h2 className="text-2xl font-bold sm:text-3xl">Got a half formed idea?</h2>
             <p className="mx-auto mt-3 max-w-md text-neutral-400">
               Spend thirty seconds. Walk away with four directions worth building.
             </p>
@@ -141,7 +119,7 @@ export default function Home() {
 
         <footer className="border-t border-neutral-900 py-8 text-center text-sm text-neutral-500">
           <p>
-            Idea Enhancer — built with Claude. Compare the{' '}
+            Idea Enhancer, built with Claude. Compare the{' '}
             <Link to="/a" className={`rounded text-neutral-300 underline-offset-4 hover:underline ${focusRing}`}>
               playful
             </Link>{' '}

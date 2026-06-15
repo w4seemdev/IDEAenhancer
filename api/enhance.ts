@@ -44,19 +44,20 @@ function clientIp(req: VercelRequest): string {
   return (raw?.split(',')[0].trim() || req.socket?.remoteAddress || 'unknown');
 }
 
-const SYSTEM = `You are an idea-enhancement engine. Given a small seed idea, you expand it into exactly FOUR divergent, fully-developed product concepts — one per direction:
+const SYSTEM = `You are an idea enhancement engine. Given a small seed idea, you expand it into exactly FOUR divergent, fully developed product concepts, one per direction:
 
-- focused  (🎯 The Focused MVP): strip the idea to its core; the version you could ship this weekend.
-- tenx      (🚀 The 10x): the ambitious, platform-scale version — what if this were huge.
-- contrarian (🤿 The Contrarian): invert a core assumption; the weird, against-the-grain take.
-- moneymaker (💰 The Money-Maker): the version with the most obvious, defensible path to revenue.
+• focused  (🎯 The Focused MVP): strip the idea to its core; the version you could ship this weekend.
+• tenx      (🚀 The 10x): the ambitious, platform scale version. What if this were huge.
+• contrarian (🤿 The Contrarian): invert a core assumption; the weird, against the grain take.
+• moneymaker (💰 The Money Maker): the version with the most obvious, defensible path to revenue.
 
 Rules:
-- Be concrete and specific to THIS seed — never generic startup boilerplate.
-- Each concept must be genuinely distinct from the others, not the same idea reworded.
-- Names should be short and brandable. Taglines: one punchy sentence.
-- Keep every field tight (1–2 sentences). No markdown, no emoji inside field values.
-- Always call the emit_ideas tool with all four directions, in the order above.`;
+• Be concrete and specific to THIS seed, never generic startup boilerplate.
+• Each concept must be genuinely distinct from the others, not the same idea reworded.
+• Names should be short and brandable. Taglines: one punchy sentence.
+• Keep every field tight (1 to 2 sentences). No markdown, no emoji inside field values.
+• Never use dashes of any kind (em dashes, en dashes, or hyphens) in any field value; rephrase to avoid them.
+• Always call the emit_ideas tool with all four directions, in the order above.`;
 
 const CARD_PROPS = {
   direction: { type: 'string', enum: ['focused', 'tenx', 'contrarian', 'moneymaker'] },
@@ -101,7 +102,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   // Per-IP rate limit before doing any work (incl. the API key check).
   if (isRateLimited(clientIp(req))) {
-    res.status(429).json({ error: 'rate_limited', detail: 'Too many requests — wait a minute and try again.' });
+    res.status(429).json({ error: 'rate_limited', detail: 'Too many requests. Wait a minute and try again.' });
     return;
   }
 
@@ -131,7 +132,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const userText =
     lineage.length > 0
-      ? `Evolution chain so far (oldest first): ${lineage.join(' -> ')}\n\nNow enhance this current idea further:\n"${seed}"`
+      ? `Evolution chain so far (oldest first): ${lineage.join(' → ')}\n\nNow enhance this current idea further:\n"${seed}"`
       : `Seed idea:\n"${seed}"`;
 
   try {

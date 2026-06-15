@@ -77,8 +77,8 @@ export default function ConceptA() {
             <span className="a-gradient-text">Four wild concepts</span> out.
           </h1>
           <p className="mt-3 max-w-xl text-base text-white/70 sm:text-lg">
-            Type something small. We spin the reels and hand you four fully-formed,
-            divergent takes — then let you evolve and share the ones you love.
+            Type something small. We spin the reels and hand you four fully formed,
+            divergent takes, then let you evolve and share the ones you love.
           </p>
         </header>
 
@@ -98,7 +98,7 @@ export default function ConceptA() {
         {hasCards && state.restored && (
           <p className="mx-auto inline-flex items-center gap-1.5 text-xs font-semibold text-white/55">
             <History className="h-3.5 w-3.5" aria-hidden />
-            Picked up where you left off — start a fresh idea any time.
+            Picked up where you left off. Start a fresh idea any time.
           </p>
         )}
 
@@ -171,7 +171,7 @@ export default function ConceptA() {
                 { e: '🎯', t: 'Focused MVP' },
                 { e: '🚀', t: 'The 10x' },
                 { e: '🤿', t: 'The Contrarian' },
-                { e: '💰', t: 'The Money-Maker' },
+                { e: '💰', t: 'The Money Maker' },
               ].map((p) => (
                 <div key={p.t} className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
                   <div className="a-float text-3xl" aria-hidden>

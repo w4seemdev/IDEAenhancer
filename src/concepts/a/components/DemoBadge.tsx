@@ -21,7 +21,7 @@ export default function DemoBadge() {
     >
       <FlaskConical className="h-3.5 w-3.5 shrink-0" aria-hidden />
       <span>
-        Demo mode — add an API key for live AI ideas
+        Demo mode: add an API key for live AI ideas
       </span>
       <button
         type="button"

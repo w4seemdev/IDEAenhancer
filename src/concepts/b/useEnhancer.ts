@@ -89,7 +89,7 @@ export function useEnhancer() {
   /** Evolve one card: feeds its name + tagline back in, keeping the lineage. */
   const evolve = useCallback(
     (card: IdeaCard) => {
-      void run(`${card.name} — ${card.tagline}`, state.lineage);
+      void run(`${card.name}: ${card.tagline}`, state.lineage);
     },
     [run, state.lineage],
   );

@@ -15,7 +15,7 @@ export function DemoBadge() {
       <Info size={13} className="text-stone-400" aria-hidden />
       <span>
         Demo mode
-        <span className="text-stone-400"> — add an API key for live AI ideas</span>
+        <span className="text-stone-400">: add an API key for live AI ideas</span>
       </span>
     </span>
   );

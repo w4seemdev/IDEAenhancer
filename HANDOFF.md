@@ -1,10 +1,11 @@
 # Handoff — Idea Enhancer
 
-Status: **the app is complete and production-ready in demo (mock) mode.** The build
-is green (`tsc --noEmit && vite build`), everything is pushed to
-`https://github.com/w4seemdev/IDEAenhancer` on `main`, and it runs fully offline
-without any API key (deterministic mock). The only things left need *your*
-accounts/secrets — they're listed below, shortest-first.
+Status: **the app is live on Vercel and production-ready in demo (mock) mode.**
+It's deployed at **https://ide-aenhancer.vercel.app** (auto-deploys on every push
+to `main`). The build is green (`tsc --noEmit && vite build`), everything is pushed
+to `https://github.com/w4seemdev/IDEAenhancer` on `main`, and it runs fully offline
+without any API key (deterministic mock). The only thing left to make it *live*
+(real Claude instead of mock) needs *your* API key — see below.
 
 ---
 
@@ -21,10 +22,10 @@ accounts/secrets — they're listed below, shortest-first.
 
 ## Needs you (in order)
 
-### 1. Deploy to Vercel (~2 min) — gives you a live URL
-- Vercel → **Add New → Project → Import** `w4seemdev/IDEAenhancer`.
-- **Root Directory: `.`** (the repo *is* the app). Framework preset: **Vite** (auto-detected). Build/output are auto.
-- Deploy. It works **immediately in demo/mock mode** — no key required yet.
+### 1. Deploy to Vercel — ✅ DONE (2026-06-15)
+- Live at **https://ide-aenhancer.vercel.app** (Vercel project slug `ide-aenhancer`).
+- Imported from GitHub, so **every push to `main` auto-deploys**. First Production deploy succeeded for commit `013d6dc`.
+- Currently running in **demo/mock mode** (no API key yet — see step 2).
 
 ### 2. Enable live Claude (flip off demo mode)
 - Vercel → Project → **Settings → Environment Variables** → add `ANTHROPIC_API_KEY = <your key>`.

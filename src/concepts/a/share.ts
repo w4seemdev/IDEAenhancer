@@ -5,7 +5,7 @@ import { DIRECTION_MAP } from '../../shared/directions';
 export function formatCard(card: IdeaCard): string {
   const dir = DIRECTION_MAP[card.direction];
   return [
-    `${dir.emoji} ${card.name} — ${card.tagline}`,
+    `${dir.emoji} ${card.name}: ${card.tagline}`,
     '',
     `${dir.label}`,
     `• Twist: ${card.twist}`,

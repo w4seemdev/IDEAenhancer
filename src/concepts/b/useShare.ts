@@ -21,7 +21,7 @@ function formatCard(card: IdeaCard): string {
 /** Format the whole set — the seed plus all four directions — for sharing. */
 function formatSet(seed: string, cards: IdeaCard[]): string {
   const header = [`Idea: ${seed}`, `Four directions from Idea Enhancer:`, ``];
-  const body = cards.map((c) => formatCard(c)).join('\n\n———\n\n');
+  const body = cards.map((c) => formatCard(c)).join('\n\n· · ·\n\n');
   return [...header, body].join('\n');
 }
 
@@ -78,7 +78,7 @@ export function useShare() {
 
   const shareSet = useCallback(
     (seed: string, cards: IdeaCard[]) =>
-      shareText(`Idea Enhancer — ${seed}`, formatSet(seed, cards)),
+      shareText(`Idea Enhancer: ${seed}`, formatSet(seed, cards)),
     [shareText],
   );
 
